@@ -27,10 +27,11 @@ class ExampleController extends Controller
 
 	public function consumeAPI()
 	{
+
 		$api_service = new APIService;
 		$access_token = $api_service->requestToken('client_credentials')['access_token'];
 		$invitee_url = config('api.base_url')."services/events/".config('event.id').'/invitees';
-		pd($api_service->request($invitee_url,'GET' ,['page'=>'2'] ,$access_token));
+		pd($api_service->request($invitee_url,'GET',$access_token, ['page'=>'2']));
 	}
 
 }

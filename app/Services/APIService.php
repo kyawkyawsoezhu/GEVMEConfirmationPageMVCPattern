@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 class APIService
 {
@@ -19,16 +20,21 @@ class APIService
 
 	}
 
-	function request($url, $method = false, array $data = [], $token = false)
+	function request($url, $method = false, $token = false, array $data = [])
 	{
 		$method = $method ? $method : 'GET';
 
 		$options = [];
-		if($data || $method == 'POST') $options['form_params'] = $data;
-		if($data || $method == 'GET') $options['query'] = $data;
+		if($data && $method == 'POST') $options['form_params'] = $data;
+		if($data && $method == 'GET') $options['query'] = $data;
 		if($token) $options['headers']['Authorization'] = 'Bearer ' . $token; 
+		
+		try{
+			$response = $this->client->request($method, $url, $options);
+		}catch (ClientException $e){
+			throw new \Exception($e->getResponse()->getBody(), 1);
+		}
 
-		$response = $this->client->request($method, $url, $options);
 
 		return json_decode($response->getBody(),true);
 	}
@@ -41,7 +47,7 @@ class APIService
 	        'client_secret' => $this->client_secret,
 	        'grant_type' => 'client_credentials'
 		];
-		$token = $this->request($oauth_token_url, 'POST', $data);
+		$token = $this->request($oauth_token_url, 'POST',false, $data);
 		return $token;
 	}
 

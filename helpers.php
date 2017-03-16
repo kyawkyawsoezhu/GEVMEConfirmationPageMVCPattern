@@ -34,3 +34,16 @@ function pd($data , $die = true){
 	echo "</pre>";
 	if ($die) die();
 }
+
+function console($value, $return = false){
+        static $count = 0;
+        $string = json_encode(print_r($value, true));
+        if (!$return)
+        {
+            $count++;
+            echo("<script>console.log('Output $count:');</script>");
+            echo("<script>console.log($string);</script>");
+        }
+        else
+            return $string;
+}
