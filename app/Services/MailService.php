@@ -22,7 +22,7 @@ class MailService
 		$mail_params = [
 			'to'      => $to,
 			'subject' => $subject,
-			'from'    => "From <" . $this->from .">",
+			'from'    => $this->from,
 		];
 		if($this->html != false){
 			$mail_params['html'] = $this->html;
@@ -31,7 +31,7 @@ class MailService
 		try{
    			$result = $mail_client->sendMessage($this->domain,$mail_params);
 		}catch(Exception $e){
-			echo $e->getMessage();
+			throw new Exception($e->getMessage(), 1);
 		}
 		return $this;
 	}
