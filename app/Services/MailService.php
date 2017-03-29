@@ -51,7 +51,7 @@ class MailService
 		if(!empty($vars)) extract($vars);
 
 		ob_start();
-		include_once($file);
+		include($file);
 		$content = ob_get_contents();
 		ob_end_clean(); 
 		return $content;
