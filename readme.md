@@ -6,10 +6,26 @@ MVC pattern, especially for GEVME custom confirmation page
 composer install
 ```
 
+### Create Envirount environment
+```
+copy '.env.default' to .env
+```
+
 ### How Route working
 ```
 www.example.com/class/method/argument1/argument2/.../
 ```
+**Example:** \
+`/confirm/send/janedoe@mail.com/JaneDoe` the URL will load `send` method in `ConfirmController` with two parameters 
+```
+class ConfirmController{
+	public function send($mail, $name)
+	{
+		. . . . . . .
+	}
+}
+```
+
 
 ### Available helper function
 
@@ -77,4 +93,6 @@ $to = "Kyaw Kyaw Soe <kyawkyaw@global-connect.asia>";
 $subject = "Example Subject";
 $mail->html('mail.example',['title'=>"Newsletter"])->send($to, $subject);
 ```
-**Note:**  `html()` method can load file under `/View` folder. 
+**Note:**  `html()` method use to load file under `/View` folder. 
+
+##### Dive into the source code for better understanding.
