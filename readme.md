@@ -11,7 +11,7 @@ composer install
 copy '.env.default' to .env
 ```
 
-### How Route working
+### How Route work
 ```
 www.example.com/class/method/argument1/argument2/.../
 ```
