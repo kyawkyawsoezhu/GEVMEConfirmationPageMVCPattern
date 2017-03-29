@@ -16,15 +16,16 @@ copy '.env.default' to .env
 www.example.com/class/method/argument1/argument2/.../
 ```
 **Example:** \
-`/confirm/send/janedoe@mail.com/JaneDoe` the URL will load `send` method in `ConfirmController` with two parameters 
+`/confirm/send/janedoe@mail.com/JaneDoe` the URL will load `send` method in `ConfirmController` class with two parameters 
 ```
 class ConfirmController{
-	public function send($mail, $name)
-	{
-		. . . . . . .
-	}
+    public function send($mail, $name)
+    {
+        . . . . . . .
+    }
 }
 ```
+**Note:** `index` method will be loaded for default
 
 
 ### Available helper function
@@ -37,7 +38,7 @@ class ConfirmController{
 
 ### view()
 **Description:** \
-Loading view file
+Load view file
 
 **Example:** \
 for loading file under `View/example/index.php` use `view('example.index')`, \
@@ -46,7 +47,7 @@ support passing variable to view from second parameter  `view('example.index',['
 
 ### config()
 **Description:** \
-Laravel-like config function, all config file are under `/Connfig` folder,
+Laravel-like config function, all config file are under `/config` folder,
 
 **Example:** \
 to get base url value in `config/api.php` use `config('api.base_url')`;
